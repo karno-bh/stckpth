@@ -22,7 +22,7 @@ class AggregatorApp:
 
     def __init__(self, top_host_number=10) -> None:
         super().__init__()
-        # since "events" object is not a OOB list amd compound, it should be explicitly locked
+        # since "events" object is not the CPython list and compound, it should be explicitly locked on access
         self.events = SortedList(key=lambda e:e[EVENT_TIMESTAMP_KEY])
         self.top_host_number = top_host_number
         self.modes_map = {
@@ -119,7 +119,6 @@ class AggregatorApp:
 
     def now(self):
         return datetime.now()
-
 
 
 if __name__ == '__main__':
