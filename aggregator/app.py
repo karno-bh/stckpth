@@ -1,7 +1,7 @@
 from collections import defaultdict
 import heapq
 from threading import Lock
-from time_utils import past_round_hour_range, past_round_minute_range
+from aggregator.time_utils import past_round_hour_range, past_round_minute_range
 from datetime import datetime
 from sortedcontainers import SortedList
 from typing import Dict
@@ -119,6 +119,7 @@ class AggregatorApp:
 
     def now(self):
         return datetime.now()
+
 
 
 if __name__ == '__main__':
