@@ -1,0 +1,33 @@
+http://localhost:8080/counter
+
+###
+
+POST http://localhost:8080/counter HTTP/1.1
+Content-Type: application/json
+
+{
+    "timestamp": 1659699431,
+    "D": 3,
+    "B": 32
+}
+
+###
+
+GET http://localhost:8080/stats HTTP/1.1
+Content-Type: application/json
+
+###
+
+
+GET http://localhost:8080/stats?stats_type=koko HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/stats?stats_type=minute HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/stats?stats_type=hour HTTP/1.1
+Content-Type: application/json
