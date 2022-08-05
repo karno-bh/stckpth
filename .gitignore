@@ -1,0 +1,14 @@
+# VI
+*.swp
+# IntelliJ
+*.iml
+.idea
+# Python
+venv
+__pycache__
+# Python tests
+.hypothesis
+# Python build
+dist
+build
+*.egg-info
