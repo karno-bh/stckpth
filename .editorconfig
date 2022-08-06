@@ -1,0 +1,17 @@
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+# Python PEP-8 + IntelliJ weird behavior on groovy files if indented with 2 spaces
+[*.{py,groovy}]
+indent_size = 4
+
+# IntelliJ weird behavior on groovy files if indented with 2 spaces
+[Jenkinsfile]
+indent_size = 4
