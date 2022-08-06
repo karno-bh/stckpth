@@ -5,6 +5,7 @@ from cherrypy.test import helper
 import json
 from datetime import datetime, timedelta
 from aggregator.app import AggregatorApp
+from aggregator.storage import InMemorySelfCleanedAggregatedEvents
 import aggregator.app
 
 FIXED_NOW = datetime.fromtimestamp(1659703029)
@@ -13,7 +14,8 @@ FIXED_NOW = datetime.fromtimestamp(1659703029)
 class AggregatorAppFixedNow(AggregatorApp):
 
     def __init__(self, top_host_number=10) -> None:
-        super().__init__(top_host_number)
+        storage = InMemorySelfCleanedAggregatedEvents()
+        super().__init__(storage, top_host_number)
         self._fixed_now = FIXED_NOW
 
     def now(self):
@@ -23,7 +25,7 @@ class AggregatorAppFixedNow(AggregatorApp):
         self._fixed_now = now
 
     def most_past_timestamp(self):
-        return self.events[0]
+        return self.storage.events[0]
 
 
 class APPWebCase(helper.CPWebCase):
