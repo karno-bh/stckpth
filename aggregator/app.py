@@ -1,11 +1,6 @@
-from collections import defaultdict
-import heapq
-from threading import Lock
 from datetime import datetime
-from sortedcontainers import SortedList
 from typing import Dict
 
-from aggregator.time_utils import past_round_hour_range, past_round_minute_range
 from aggregator.consts import *
 from aggregator.storage import AggregatedEvents, InMemorySelfCleanedAggregatedEvents
 
@@ -39,7 +34,7 @@ class AggregatorApp:
                                   f" Supported statistics are {ALLOWED_STATS_TYPES}")
 
         return {
-            "top_hosts": self.storage.top_hosts(stats_type, self.top_host_number,self.now())
+            "top_hosts": self.storage.top_hosts(stats_type, self.top_host_number, self.now())
         }
 
     def gen_error(self, text, code='400'):
@@ -54,11 +49,11 @@ class AggregatorApp:
             return None, self.gen_error(f"Http Method {method} is not Supported")
         event = cherrypy.request.json
         if not isinstance(event, dict):
-            return None, self.gen_error("POST body _MUST_ be an JSON object")
+            return None, self.gen_error("POST body _MUST_ be a JSON object")
         if len(event) < 2:
             return None, self.gen_error("POST body JSON object contains too few fields")
         if EVENT_TIMESTAMP_KEY not in event:
-            return None, self.gen_error(f"POST body object _MUST_ include 'f{EVENT_TIMESTAMP_KEY}' key")
+            return None, self.gen_error(f"POST body object _MUST_ include '{EVENT_TIMESTAMP_KEY}' key")
         timestamp = event[EVENT_TIMESTAMP_KEY]
         if not isinstance(timestamp, int) or timestamp < 0:
             return None, self.gen_error(f"Timestamp should be positive integer")

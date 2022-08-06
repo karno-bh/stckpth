@@ -40,7 +40,7 @@ class InMemorySelfCleanedAggregatedEvents(AggregatedEvents):
 
     def _clean_old_events(self, now: datetime):
         clean_end_t = past_round_hour_range(now).start
-        first_known_event = self.events[0] # this is safe, since at least one event should be already in
+        first_known_event = self.events[0]  # this is safe, since at least one event should be already in
         should_clean = first_known_event[EVENT_TIMESTAMP_KEY] < clean_end_t
         if should_clean:
             with self.events_lock:
@@ -73,4 +73,3 @@ class InMemorySelfCleanedAggregatedEvents(AggregatedEvents):
                              ((h, r_num) for h, r_num in host_requests.items()),
                              key=lambda e: e[1])
         return dict(top)
-
